@@ -16,7 +16,7 @@ function LandingPage() {
   return (
     <div className="landingPageLoop" id='landingPage'>
       {loop ? <LoopGif /> : 
-      <h1>Bonjour!</h1>
+      <h1>Bonjour !</h1>
       }
     </div>
   );
