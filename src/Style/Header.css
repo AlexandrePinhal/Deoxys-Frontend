@@ -1,0 +1,21 @@
+.headerContainer {
+    background-color: var(--sage);
+    width: 100%;
+    height: 10vh;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.negosudWrapper {
+    color : var(--cab);
+    height : 100%;
+}
+
+.negosudWrapper > img {
+    height: 100%;
+}
+
+.authenticationWrapper {
+    margin-right: 2vw;
+}

@@ -1,0 +1,19 @@
+.landingPageLoop {
+    height: 89.99vh;
+    background-color: #601351;
+    text-align: center;
+    overflow: hidden;
+}
+
+.landingPageLoop img {
+    min-height: 100%;
+}
+
+.landingPage {
+    background-color: var(--terrace );
+    height: 89.99vh;
+    text-align: center;
+    overflow: hidden;
+    background-image: url("../Assets/vignoble.jpg");
+    background-size: cover;
+}
