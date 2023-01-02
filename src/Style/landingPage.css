@@ -17,3 +17,12 @@
     background-image: url("../Assets/vignoble.jpg");
     background-size: cover;
 }
+
+.mottoWrapper{
+    width : 25%;
+    left : 20vw;
+    top: 20%;
+    position: relative;
+    color: var(--cab);
+    font-size: 3vh;
+}

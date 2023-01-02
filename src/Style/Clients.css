@@ -1,0 +1,41 @@
+h1 {
+  color: #995c41;
+  text-align: center;
+}
+
+.client-info {
+  background-color: #eae5e1;
+  padding: 20px;
+  margin: 10px 0;
+  border-radius: 10px;
+  width: 60%;
+  margin: 0 auto;
+  margin-bottom: 1vh;
+}
+
+.client-info h3 {
+  color: #545445;
+  margin-bottom: 10px;
+}
+
+.client-info p {
+  color: #482308;
+  margin: 5px 0;
+}
+
+.client-info h4 {
+  color: #995c41;
+  margin-top: 20px;
+}
+
+.client-info .order {
+  background-color: #c6c5b3;
+  padding: 10px;
+  margin: 10px 0;
+  border-radius: 5px;
+}
+
+.client-info .order p {
+  color: #ae6e4b;
+  margin: 5px 0;
+}

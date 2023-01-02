@@ -3,17 +3,24 @@ import "../Style/Header.css";
 import NegoSud from "../Assets/NegoSud.png"
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import { Link } from "react-router-dom";
 
 function Header(props) {
 
-    const headerTitle = ["PRODUITS","PANIER","CONTACT"]
+    const headerTitle = [["PRODUITS", "/Products"],["PANIER", "/Cart"],["CONTACT", "/Contact"], ["CLIENTS", "/Clients"]]
 
     return(
         <div className='headerContainer'>
             <div className='negosudWrapper'><img src={NegoSud} alt="NEGOSUD" /></div>
             <Stack spacing={2} direction="row">
-                {headerTitle.map((header) => {
-                    return(<Button sx={{fontSize : '18px'}} color='secondary' size='large' variant='text'>{header}</Button>)
+                {headerTitle.map((header, index) => {
+                    return(
+                        <Link to={header[1]}>
+                            <Button key={index} sx={{fontSize : '22px'}} style={{lineHeight : '280%'}} color='secondary' size='large' variant='text'>
+                                {header[0]}
+                            </Button>
+                        </Link>
+                        )
                 })}
             </Stack>
             <Stack direction="row" className='authenticationWrapper'>
