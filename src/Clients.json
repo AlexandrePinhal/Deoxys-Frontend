@@ -1,0 +1,74 @@
+{
+  "clients": [
+    {
+      "nom": "Martin",
+      "prenom": "Jean",
+      "telephone": "0612345678",
+      "email": "jean.martin@gmail.com",
+      "historique_commandes": [
+        {
+          "date": "2022-01-01",
+          "numero_commande": "1234",
+          "nombre_produits": 3
+        },
+        {
+          "date": "2022-02-14",
+          "numero_commande": "5678",
+          "nombre_produits": 2
+        }
+      ]
+    },
+    {
+      "nom": "Durant",
+      "prenom": "Emilie",
+      "telephone": "0698765432",
+      "email": "emilie.durant@gmail.com",
+      "historique_commandes": [
+        {
+          "date": "2022-03-01",
+          "numero_commande": "9101",
+          "nombre_produits": 1
+        }
+      ]
+    },
+    {
+      "nom": "Brun",
+      "prenom": "Marc",
+      "telephone": "0623456789",
+      "email": "marc.brun@gmail.com",
+      "historique_commandes": [
+        {
+          "date": "2022-04-01",
+          "numero_commande": "1121",
+          "nombre_produits": 4
+        }
+      ]
+    },
+    {
+      "nom": "Dubois",
+      "prenom": "Sophie",
+      "telephone": "0698765432",
+      "email": "sophie.dubois@gmail.com",
+      "historique_commandes": [
+        {
+          "date": "2022-05-01",
+          "numero_commande": "1314",
+          "nombre_produits": 2
+        }
+      ]
+    },
+    {
+      "nom": "Leroy",
+      "prenom": "Paul",
+      "telephone": "0612345678",
+      "email": "paul.leroy@gmail.com",
+      "historique_commandes": [
+        {
+          "date": "2022-06-01",
+          "numero_commande": "1516",
+          "nombre_produits": 3
+        }
+      ]
+    }
+  ]
+}

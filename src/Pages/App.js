@@ -3,6 +3,10 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LandingPage from "./LandingPage";
 import Header from "../Components/Header";
 import Home from "./Home";
+import Cart from "./Cart";
+import Products from "./Products"
+import Contact from "./Contact";
+import ClientsPage from "./Clients";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme({
@@ -23,11 +27,15 @@ function App() {
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
-        <Header/>
         <BrowserRouter>
+          <Header/>
           <Routes>
             <Route path="/" element={<LandingPage/>}/>
             <Route path="/Home" element={<Home/>}/>
+            <Route path="/Products" element={<Products/>}/>
+            <Route path="/Cart" element={<Cart/>}/>
+            <Route path="/Contact" element={<Contact/>}/>
+            <Route path="/Clients" element={<ClientsPage/>}/>
           </Routes>
         </BrowserRouter>
       </ThemeProvider>

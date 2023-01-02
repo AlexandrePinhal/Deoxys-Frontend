@@ -16,7 +16,9 @@ function LandingPage() {
   return (
     <div className="landingPageLoop" id='landingPage'>
       {loop ? <LoopGif /> : 
-      <h1>Bonjour !</h1>
+      <div className="mottoWrapper">
+        <h1>Negosud, le meilleur du vin selectionné pour vous.</h1>
+      </div>
       }
     </div>
   );
