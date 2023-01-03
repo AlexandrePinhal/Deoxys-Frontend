@@ -1,0 +1,104 @@
+.bouteilles-list {
+  list-style: none;
+  padding: 0;
+  background-color: #eae5e1;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.bouteilles-list button {
+  list-style: none;
+  background-color: #c48552;
+  border-radius: 10px;
+  padding: 8px;
+  border: 1px solid white;
+  outline: none;
+  color: white;
+}
+
+.bouteilles-list button:hover {
+    background-color: #c57d43;
+}
+
+.bouteilles-list button:active {
+  background-color: #c58958;;
+}
+
+.bouteille-cart {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: #d4c7be;
+  border-radius: 5px;
+}
+
+.bouteille-cart p {
+  color: #545445;
+  margin: 0;
+}
+
+.bouteille-cart p:first-child {
+  color: #995c41;
+  font-size: 18px;
+  margin-right: 10px;
+  width: 25%;
+}
+
+.bouteille-cart p:nth-child(2) {
+  color: #c78460;
+  font-size: 14px;
+}
+
+.bouteille-cart p:nth-child(3) {
+  color: #5f5b0a;
+}
+
+.bouteille-cart p:last-child {
+  color: #995c41;
+  font-size: 14px;
+  margin-left: 10px;
+}
+
+.bouteille-cart input {
+  width: 10vw;
+  padding: 0 20px;
+  border: none;
+  border-radius: 25px;
+  background-color: #eae5e1;
+  font-size: 16px;
+  color: #545445;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.bouteille-cart input::placeholder {
+  color: #d4c7be;
+}
+
+.bouteille-cart input:focus {
+  background-color: #d4c7be;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.bouteille-cart button {
+  display: inline-block;
+  background-image: url("../Assets/delete.png");
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+  border: none;
+  cursor: pointer;
+  background-color: #d4c7be;
+  border: none;
+  outline: none;
+}
+
+.bouteille-cart button:hover {
+  background-color: rgba(255, 0, 0, 0.1);
+}
+
+.bouteille-cart button:active {
+  background-color: rgba(255, 0, 0, 0.3);
+}

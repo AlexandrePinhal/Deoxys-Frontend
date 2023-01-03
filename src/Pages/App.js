@@ -1,3 +1,4 @@
+import React, {useState, useEffect} from "react";
 import "../Style/App.css";
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LandingPage from "./LandingPage";
@@ -24,6 +25,9 @@ const theme = createTheme({
 });
 
 function App() {
+
+  const [cart, setCart] = useState([])
+
   return (
     <div className="App">
       <ThemeProvider theme={theme}>
@@ -32,8 +36,8 @@ function App() {
           <Routes>
             <Route path="/" element={<LandingPage/>}/>
             <Route path="/Home" element={<Home/>}/>
-            <Route path="/Products" element={<Products/>}/>
-            <Route path="/Cart" element={<Cart/>}/>
+            <Route path="/Products" element={<Products cart={cart} setCart={setCart}/>}/>
+            <Route path="/Cart" element={<Cart cart={cart} setCart={setCart}/>}/>
             <Route path="/Contact" element={<Contact/>}/>
             <Route path="/Clients" element={<ClientsPage/>}/>
           </Routes>
