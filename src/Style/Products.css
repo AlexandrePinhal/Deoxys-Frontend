@@ -14,6 +14,7 @@
   background-color: #d4c7be;
   border-radius: 5px;
   padding: 10px;
+  position: relative;
 }
 
 .bouteille-item img {
@@ -46,4 +47,20 @@
   color: #995c41;
   font-size: 14px;
   margin-bottom: 10px;
+}
+
+.bouteille-item button {
+  background-color: #995c41;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  right: -28.5%;
+  position: relative;
+}
+
+.bouteille-item button:hover {
+  background-color: #d8bfb2;
 }

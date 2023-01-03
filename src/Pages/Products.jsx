@@ -3,7 +3,14 @@ import "../Style/Products.css";
 
 const bouteillesJSON = require("../Products.json");
 
-const BouteillesList = () => {
+const BouteillesList = (props) => {
+
+    function handleAddCart(bouteille) {
+        let temp = props.cart 
+        temp.push(bouteille)
+        props.setCart([...temp])
+    }
+
   return (
     <div className="bouteilles-grid">
       {bouteillesJSON.bouteilles.map((bouteille) => {
@@ -14,6 +21,7 @@ const BouteillesList = () => {
             <p>{bouteille.famille}</p>
             <p>Prix: {bouteille.prix}€</p>
             <p>Quantité disponible: {bouteille.quantite}</p>
+            <button onClick={() => {handleAddCart(bouteille)}}>Ajouter au panier</button>
           </div>
         );
       })}

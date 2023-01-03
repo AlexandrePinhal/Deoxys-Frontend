@@ -15,8 +15,8 @@ function Header(props) {
             <Stack spacing={2} direction="row">
                 {headerTitle.map((header, index) => {
                     return(
-                        <Link to={header[1]}>
-                            <Button key={index} sx={{fontSize : '22px'}} style={{lineHeight : '280%'}} color='secondary' size='large' variant='text'>
+                        <Link to={header[1]} key={index}>
+                            <Button sx={{fontSize : '22px'}} style={{lineHeight : '280%'}} color='secondary' size='large' variant='text'>
                                 {header[0]}
                             </Button>
                         </Link>
