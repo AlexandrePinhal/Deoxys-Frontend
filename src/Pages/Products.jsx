@@ -1,11 +1,24 @@
-import "../Style/App.css";
+import React from "react";
+import "../Style/Products.css";
 
-function Products() {
+const bouteillesJSON = require("../Products.json");
+
+const BouteillesList = () => {
   return (
-    <div>
-      Yo je suis la page products
+    <div className="bouteilles-grid">
+      {bouteillesJSON.bouteilles.map((bouteille) => {
+        return (
+          <div key={bouteille.uuid} className="bouteille-item">
+            <img src={require(`../Assets/Products/${bouteille.uuid}.png`)} alt={`${bouteille.fournisseur} ${bouteille.famille}`} />
+            <p>{bouteille.fournisseur}</p>
+            <p>{bouteille.famille}</p>
+            <p>Prix: {bouteille.prix}€</p>
+            <p>Quantité disponible: {bouteille.quantite}</p>
+          </div>
+        );
+      })}
     </div>
   );
-}
+};
 
-export default Products;
+export default BouteillesList;

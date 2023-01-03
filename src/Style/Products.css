@@ -1,0 +1,49 @@
+.bouteilles-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  background-color: #eae5e1;
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.bouteille-item {
+  width: 25%;
+  margin-bottom: 20px;
+  text-align: center;
+  background-color: #d4c7be;
+  border-radius: 5px;
+  padding: 10px;
+}
+
+.bouteille-item img {
+  width: 100%;
+  height: auto;
+  border-radius: 5px;
+}
+
+.bouteille-item p {
+  color: #545445;
+  margin: 5px 0;
+}
+
+.bouteille-item p:first-child {
+  color: #995c41;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.bouteille-item p:nth-child(2) {
+  color: #be7046;
+  font-size: 14px;
+}
+
+.bouteille-item p:nth-child(3) {
+  color: #8f8923;
+}
+
+.bouteille-item p:last-child {
+  color: #995c41;
+  font-size: 14px;
+  margin-bottom: 10px;
+}

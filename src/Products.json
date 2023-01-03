@@ -1,0 +1,74 @@
+{
+  "bouteilles": [
+    {
+      "prix": 15,
+      "fournisseur": "Domaine de la Romanée-Conti",
+      "uuid": "1a2b3c4d",
+      "quantite": 12,
+      "famille": "rouge"
+    },
+    {
+      "prix": 20,
+      "fournisseur": "Château Margaux",
+      "uuid": "5e6f7g8h",
+      "quantite": 8,
+      "famille": "rouge"
+    },
+    {
+      "prix": 30,
+      "fournisseur": "Château d'Yquem",
+      "uuid": "9i0j1k2l",
+      "quantite": 5,
+      "famille": "blanc"
+    },
+    {
+      "prix": 12,
+      "fournisseur": "Domaine Leflaive",
+      "uuid": "3m4n5o6p",
+      "quantite": 20,
+      "famille": "blanc"
+    },
+    {
+      "prix": 18,
+      "fournisseur": "Champagne Ruinart",
+      "uuid": "7q8r9s0t",
+      "quantite": 15,
+      "famille": "champagne"
+    },
+    {
+      "prix": 25,
+      "fournisseur": "Champagne Moët & Chandon",
+      "uuid": "u1v2w3x4",
+      "quantite": 10,
+      "famille": "champagne"
+    },
+    {
+      "prix": 8,
+      "fournisseur": "Domaine de la Baume",
+      "uuid": "y5z6a7b8",
+      "quantite": 25,
+      "famille": "rosé"
+    },
+    {
+      "prix": 15,
+      "fournisseur": "Château de Sancerre",
+      "uuid": "c9d0e1f2",
+      "quantite": 20,
+      "famille": "rosé"
+    },
+    {
+      "prix": 20,
+      "fournisseur": "Domaine Bouchard Père & Fils",
+      "uuid": "g3h4i5j6",
+      "quantite": 15,
+      "famille": "rouge"
+    },
+    {
+      "prix": 10,
+      "fournisseur": "Domaine des Malandes",
+      "uuid": "k7l8m9n0",
+      "quantite": 25,
+      "famille": "blanc"
+    }
+  ]
+}
