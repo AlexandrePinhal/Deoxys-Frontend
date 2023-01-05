@@ -1,0 +1,22 @@
+.families-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 45%;
+  margin: 20px 0;
+  padding: 20px;
+  background-color: #d8bfb2;
+  border-radius: 10px;
+}
+
+.families-info h3 {
+  color: #995c41;
+  font-size: 18px;
+  margin: 0 0 10px 0;
+}
+
+.families-wrapper {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+}

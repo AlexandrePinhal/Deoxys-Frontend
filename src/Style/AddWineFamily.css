@@ -1,0 +1,57 @@
+.add-famille-vin-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.form-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  margin: 20px 0;
+}
+
+.form-group label {
+  width: 30%;
+  color: #995c41;
+  font-size: 16px;
+}
+
+.form-group input {
+  width: 70%;
+  height: 50px;
+  padding: 0 20px;
+  border: none;
+  border-radius: 25px;
+  background-color: #eae5e1;
+  font-size: 16px;
+  color: #545445;
+  outline: none;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.form-group input::placeholder {
+  color: #d4c7be;
+}
+
+.form-group input:focus {
+  background-color: #d4c7be;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button {
+  background-color: #eae5e1;
+  color: #545445;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 20px 0;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #d4c7be;
+}
