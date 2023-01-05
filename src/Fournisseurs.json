@@ -1,0 +1,23 @@
+[
+  {
+    "id": "1",
+    "nom": "Vins du Sud",
+    "adresse": "123 Rue des Vignes, 80000 Bordeaux",
+    "telephone": "06 01 02 03 04",
+    "email": "contact@vinsdusud.com"
+  },
+  {
+    "id": "2",
+    "nom": "Vignobles de France",
+    "adresse": "456 Allée des Vignobles, 75000 Paris",
+    "telephone": "06 05 06 07 08",
+    "email": "contact@vignoblesdefrance.com"
+  },
+  {
+    "id": "3",
+    "nom": "Domaine de la Vigne",
+    "adresse": "789 Chemin de la Vigne, 13000 Marseille",
+    "telephone": "06 09 10 11 12",
+    "email": "contact@domainedelavigne.com"
+  }
+]

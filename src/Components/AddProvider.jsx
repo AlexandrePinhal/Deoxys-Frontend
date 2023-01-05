@@ -1,23 +1,23 @@
 import React, { useState } from "react";
-import "../Style/AddClient.css"
+import "../Style/AddProvider.css";
 
-const AddClientForm = () => {
+const AddFournisseurForm = () => {
   const [nom, setNom] = useState("");
-  const [prenom, setPrenom] = useState("");
+  const [adresse, setAdresse] = useState("");
   const [telephone, setTelephone] = useState("");
   const [email, setEmail] = useState("");
 
   const handleSubmit = (e) => {
     e.preventDefault();
     setNom("");
-    setPrenom("");
+    setAdresse("");
     setTelephone("");
     setEmail("");
   };
 
   return (
-    <form className="add-client-form" onSubmit={handleSubmit}>
-      <h2>Ajouter un client</h2>
+    <form className="add-fournisseur-form" onSubmit={handleSubmit}>
+      <h2>Ajouter un fournisseur</h2>
       <div className="form-group">
         <label htmlFor="nom">Nom</label>
         <input
@@ -30,13 +30,13 @@ const AddClientForm = () => {
         />
       </div>
       <div className="form-group">
-        <label htmlFor="prenom">Prénom</label>
+        <label htmlFor="adresse">Adresse</label>
         <input
           type="text"
-          id="prenom"
-          name="prenom"
-          value={prenom}
-          onChange={(e) => setPrenom(e.target.value)}
+          id="adresse"
+          name="adresse"
+          value={adresse}
+          onChange={(e) => setAdresse(e.target.value)}
           required
         />
       </div>
@@ -67,4 +67,4 @@ const AddClientForm = () => {
   );
 };
 
-export default AddClientForm;
+export default AddFournisseurForm;
