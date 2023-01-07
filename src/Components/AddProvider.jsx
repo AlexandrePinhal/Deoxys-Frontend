@@ -9,6 +9,23 @@ const AddFournisseurForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log(nom, email, telephone, adresse)
+    fetch("http://176.136.89.140:5000/fournisseurs/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: nom,
+        address : adresse,
+        phone : telephone,
+        email,
+      })
+    })
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error(error);
+      });
     setNom("");
     setAdresse("");
     setTelephone("");

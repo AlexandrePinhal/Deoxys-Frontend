@@ -6,3 +6,22 @@
   --vine : #545445;
   --sage : #C6C5B3;
 }
+
+a {
+  text-decoration: none;
+}
+
+.buttonDeletion {
+  display: inline-block;
+  background-image: url("../Assets/delete.png");
+  background-size: contain;
+  width: 24px;
+  height: 24px;
+  border: none;
+  cursor: pointer;
+  background-color: #d4c7be;
+  border: none;
+  outline: none;
+  padding : 0;
+  margin : 0;
+}

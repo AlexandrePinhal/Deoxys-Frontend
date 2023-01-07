@@ -10,7 +10,7 @@ const FamiliesPage = (props) => {
       {props.isConnected === true ? (
         <>
           <AddFamillesForm />
-          <h1>Liste des fournisseurs</h1>
+          <h1>Liste des familles</h1>
           <FamillesList />
         </>
       ) : <p>Vous n'êtes pas connecté</p>}

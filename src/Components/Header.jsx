@@ -13,6 +13,7 @@ function Header(props) {
     ["CLIENTS", "/Clients"],
     ["FOURNISSEURS", "/Providers"],
     ["FAMILLES", "/Families"],
+    ["MANAGE PRODUCTS", "/ManageProducts"],
   ];
 
   return (

@@ -1,9 +1,20 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import "../Style/Products.css";
 
-const bouteillesJSON = require("../Products.json");
-
 const BouteillesList = (props) => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    fetch("http://176.136.89.140:5000/products/")
+      .then((response) => response.json())
+      .then((products) => {
+        setProducts(products);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   function handleAddCart(bouteille) {
     let temp = props.cart;
     temp.push(bouteille);
@@ -14,11 +25,11 @@ const BouteillesList = (props) => {
     <div className="bouteilles-grid">
       {props.isConnected === true ? (
         <>
-          {bouteillesJSON.bouteilles.map((bouteille) => {
+          {products.map((bouteille) => {
             return (
-              <div key={bouteille.uuid} className="bouteille-item">
+              <div key={bouteille.id} className="bouteille-item">
                 <img
-                  src={require(`../Assets/Products/${bouteille.uuid}.png`)}
+                  src={require(`../Assets/Products/${bouteille.id}.png`)}
                   alt={`${bouteille.fournisseur} ${bouteille.famille}`}
                 />
                 <p>{bouteille.fournisseur}</p>

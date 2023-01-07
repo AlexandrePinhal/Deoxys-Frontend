@@ -1,8 +1,41 @@
 import React, { useState } from "react";
-import '../Style/ConnexionInscription.css'
+import "../Style/ConnexionInscription.css";
+import {Role} from "../Pages/App"
 
 const ConnexionInscription = (props) => {
   const [formulaireActif, setFormulaireActif] = useState("connexion");
+
+  const [nom, setNom] = useState("");
+  const [prenom, setPrenom] = useState("");
+  //   const [telephone, setTelephone] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  function handleSubmit(e) {
+    e.preventDefault();
+    console.log(nom, prenom);
+    fetch("http://176.136.89.140:5000/users/", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        name: nom + " " + prenom,
+        email,
+        password,
+        role: Role.User,
+      }),
+    })
+      .then((response) => response.json())
+      .catch((error) => {
+        console.error(error);
+      });
+    setNom("");
+    setPrenom("");
+    // setTelephone("");
+    setEmail("");
+    setPassword("");
+  };
 
   return (
     <div className="connexion-inscription-container">
@@ -20,7 +53,14 @@ const ConnexionInscription = (props) => {
               placeholder="Mot de passe"
               className="modern-input"
             />
-            <button className="bouton" onClick={() => {props.setIsConnected(true)}}>Se connecter</button>
+            <button
+              className="bouton"
+              onClick={() => {
+                props.setIsConnected(true);
+              }}
+            >
+              Se connecter
+            </button>
           </div>
           <button
             className="boutonAlt"
@@ -34,24 +74,43 @@ const ConnexionInscription = (props) => {
         <>
           <h1 className="titre">Inscription</h1>
           <div className="inscription-form">
-            <input type="text" placeholder="Nom" className="modern-input" />
-            <input type="text" placeholder="Prénom" className="modern-input" />
+            <input
+              type="text"
+              placeholder="Nom"
+              className="modern-input"
+              value={nom}
+              onChange={(e) => setNom(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Prénom"
+              className="modern-input"
+              value={prenom}
+              onChange={(e) => setPrenom(e.target.value)}
+            />
             <input
               type="email"
               placeholder="Adresse e-mail"
               className="modern-input"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"
               placeholder="Mot de passe"
               className="modern-input"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
-            <input
-              type="password"
-              placeholder="Confirmer le mot de passe"
-              className="modern-input"
-            />
-            <button className="bouton" onClick={() => {props.setIsConnected(true)}}>S'inscrire</button>
+            <button
+              className="bouton"
+              onClick={(e) => {
+                props.setIsConnected(true);
+                handleSubmit(e);
+              }}
+            >
+              S'inscrire
+            </button>
           </div>
           <button
             className="boutonAlt"
