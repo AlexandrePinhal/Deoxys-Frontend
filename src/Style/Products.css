@@ -16,6 +16,9 @@
   border-radius: 5px;
   padding: 10px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
 }
 
 .bouteille-item img {
