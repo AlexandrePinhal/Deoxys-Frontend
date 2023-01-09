@@ -5,6 +5,7 @@
   background-color: #eae5e1;
   border-radius: 10px;
   padding: 20px;
+  min-height: 84vh;
 }
 
 .bouteille-item {
@@ -57,6 +58,7 @@
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
+
   position: relative;
 }
 
