@@ -16,7 +16,6 @@ const CreateProductForm = () => {
       .then((response) => response.json())
       .then((fournisseurs) => {
         setFournisseurs(fournisseurs);
-        console.log(fournisseurs);
       })
       .catch((error) => {
         console.error(error);
@@ -28,7 +27,6 @@ const CreateProductForm = () => {
       .then((response) => response.json())
       .then((families) => {
         setFamilies(families);
-        console.log(families)
       })
       .catch((error) => {
         console.error(error);
@@ -53,7 +51,6 @@ const CreateProductForm = () => {
     })
       .then((response) => response.json())
       .then((data) => {
-        console.log(data);
       })
       .catch((error) => {
         console.error(error);
@@ -93,7 +90,6 @@ const CreateProductForm = () => {
           value={fournisseur}
           onChange={(e) => {
             setFournisseur(e.target.value);
-            console.log(e.target.value);
           }}
         >
           <option value={"- - -"}></option>

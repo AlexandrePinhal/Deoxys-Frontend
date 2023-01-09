@@ -9,7 +9,6 @@ const FournisseursList = () => {
       .then((response) => response.json())
       .then((familles) => {
         setFamilles(familles);
-        console.log(familles);
       })
       .catch((error) => {
         console.error(error);

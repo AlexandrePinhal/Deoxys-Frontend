@@ -9,7 +9,6 @@ const AddFournisseurForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(nom, email, telephone, adresse)
     fetch("http://176.136.89.140:5000/fournisseurs/", {
       method: "POST",
       headers: {

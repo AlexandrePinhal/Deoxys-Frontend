@@ -17,7 +17,6 @@ function Cart(props) {
       setQuantities([...tempQ]);
     }
     handleTotalPrice();
-    console.log("Ah")
     //eslint-disable-next-line
   }, [props.cart]);
 

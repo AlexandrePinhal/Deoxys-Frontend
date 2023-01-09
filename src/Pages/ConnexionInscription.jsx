@@ -13,7 +13,6 @@ const ConnexionInscription = (props) => {
 
   function handleSubmit(e) {
     e.preventDefault();
-    console.log(nom, prenom);
     fetch("http://176.136.89.140:5000/users/", {
       method: "POST",
       headers: {

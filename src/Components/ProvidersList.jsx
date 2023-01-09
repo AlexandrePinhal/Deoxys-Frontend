@@ -8,7 +8,6 @@ const FournisseursList = () => {
       .then((response) => response.json())
       .then((fournisseurs) => {
         setFournisseurs(fournisseurs);
-        console.log(fournisseurs);
       })
       .catch((error) => {
         console.error(error);
