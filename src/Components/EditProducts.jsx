@@ -1,9 +1,35 @@
 import React, { useState, useEffect } from "react";
 
+import "../Style/EditProducts.css";
+
 const EditProducts = () => {
   const [products, setProducts] = useState([]);
   const [updateProduct, setUpdateProduct] = useState({});
   const [isUpdating, setIsUpdating] = useState(false);
+  const [fournisseurs, setFournisseurs] = useState([]);
+  const [families, setFamilies] = useState([]);
+
+  useEffect(() => {
+    fetch("http://176.136.89.140:5000/fournisseurs/")
+      .then((response) => response.json())
+      .then((fournisseurs) => {
+        setFournisseurs(fournisseurs);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
+  useEffect(() => {
+    fetch("http://176.136.89.140:5000/families/")
+      .then((response) => response.json())
+      .then((families) => {
+        setFamilies(families);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,6 +47,25 @@ const EditProducts = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    const updateProductDTO = {
+      Id: updateProduct.id,
+      Name: updateProduct.name,
+      Year: updateProduct.year,
+      Fournisseur: updateProduct.fournisseur,
+      Family: updateProduct.family,
+      Price: updateProduct.price,
+      Quantity: updateProduct.quantity,
+    };
+    fetch("http://176.136.89.140:5000/products/", {
+      method: "PUT",
+      body: JSON.stringify(updateProductDTO),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((error) => console.error(error));
     setIsUpdating(false);
     setUpdateProduct({});
   };
@@ -68,8 +113,7 @@ const EditProducts = () => {
           </div>
           <div className="form-group">
             <label htmlFor="fournisseur">Fournisseur</label>
-            <input
-              type="text"
+            <select
               id="fournisseur"
               name="fournisseur"
               value={updateProduct.fournisseur}
@@ -79,19 +123,36 @@ const EditProducts = () => {
                   fournisseur: e.target.value,
                 })
               }
-            />
+            >
+              <option value={"- - -"}></option>
+              {fournisseurs.map((fournisseur) => {
+                return (
+                  <option key={fournisseur.id} value={fournisseur.id}>
+                    {fournisseur.name}
+                  </option>
+                );
+              })}
+            </select>
           </div>
           <div className="form-group">
             <label htmlFor="family">Famille</label>
-            <input
-              type="text"
+            <select
               id="family"
               name="family"
               value={updateProduct.family}
               onChange={(e) =>
                 setUpdateProduct({ ...updateProduct, family: e.target.value })
               }
-            />
+            >
+              <option value={"- - -"}></option>
+              {families.map((famille) => {
+                return (
+                  <option key={famille.id} value={famille.id}>
+                    {famille.name}
+                  </option>
+                );
+              })}
+            </select>
           </div>
           <div className="form-group">
             <label htmlFor="price">Prix</label>

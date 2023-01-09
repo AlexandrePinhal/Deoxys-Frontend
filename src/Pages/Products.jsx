@@ -28,14 +28,14 @@ const BouteillesList = (props) => {
           {products.map((bouteille) => {
             return (
               <div key={bouteille.id} className="bouteille-item">
-                <img
+                {/* <img
                   src={require(`../Assets/Products/${bouteille.id}.png`)}
                   alt={`${bouteille.fournisseur} ${bouteille.famille}`}
-                />
-                <p>{bouteille.fournisseur}</p>
+                /> */}
+                <p>{bouteille.name}</p>
                 <p>{bouteille.famille}</p>
-                <p>Prix: {bouteille.prix}€</p>
-                <p>Quantité disponible: {bouteille.quantite}</p>
+                <p>Prix: {bouteille.price}€</p>
+                <p>Quantité disponible: {bouteille.quantity}</p>
                 <button
                   onClick={() => {
                     handleAddCart(bouteille);

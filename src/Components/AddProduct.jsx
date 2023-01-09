@@ -37,7 +37,6 @@ const CreateProductForm = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(name, year, fournisseur, price, quantity);
     fetch("http://176.136.89.140:5000/products/", {
       method: "POST",
       headers: {
