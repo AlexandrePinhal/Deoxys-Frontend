@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 import "../Style/EditProducts.css";
 
@@ -10,7 +11,13 @@ const EditProducts = () => {
   const [families, setFamilies] = useState([]);
 
   useEffect(() => {
-    fetch("http://176.136.89.140:5000/fournisseurs/")
+    fetch("http://176.136.89.140:5000/fournisseurs/", {
+      headers: {
+        Authorization: localStorage.getItem("token")
+          ? `Basic ${localStorage.getItem("token")}`
+          : undefined,
+      },
+    })
       .then((response) => response.json())
       .then((fournisseurs) => {
         setFournisseurs(fournisseurs);
@@ -21,7 +28,13 @@ const EditProducts = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://176.136.89.140:5000/families/")
+    fetch("http://176.136.89.140:5000/families/", {
+      headers: {
+        Authorization: localStorage.getItem("token")
+          ? `Basic ${localStorage.getItem("token")}`
+          : undefined,
+      },
+    })
       .then((response) => response.json())
       .then((families) => {
         setFamilies(families);
@@ -33,7 +46,13 @@ const EditProducts = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const result = await fetch("http://176.136.89.140:5000/products/");
+      const result = await fetch("http://176.136.89.140:5000/products/", {
+        headers: {
+          Authorization: localStorage.getItem("token")
+            ? `Basic ${localStorage.getItem("token")}`
+            : undefined,
+        },
+      });
       const data = await result.json();
       setProducts(data);
     };
@@ -60,18 +79,50 @@ const EditProducts = () => {
       method: "PUT",
       body: JSON.stringify(updateProductDTO),
       headers: {
+        Authorization: localStorage.getItem("token")
+          ? `Basic ${localStorage.getItem("token")}`
+          : undefined,
         "Content-Type": "application/json",
       },
     })
-      .then((res) => res.json())
+      .then((response) => {
+        if (response.status === 200) {
+          toast.success("Updated!");
+        } else {
+          toast.error("Error");
+        }
+      })
       .catch((error) => console.error(error));
     setIsUpdating(false);
     setUpdateProduct({});
   };
 
+  function handleProductDeletion(e, i, index) {
+    console.log(i)
+    e.preventDefault(e);
+    let temp = products;
+    temp.splice(index, 1);
+    setProducts([...temp]);
+    fetch(`http://176.136.89.140:5000/Products/${i}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: localStorage.getItem("token")
+          ? `Basic ${localStorage.getItem("token")}`
+          : undefined,
+        "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      if (response.status === 200) {
+        toast.success("Deleted!");
+      } else {
+        toast.error("Error");
+      }
+    });
+  }
+
   return (
     <div>
-      {products.map((product) => {
+      {products.map((product, index) => {
         return (
           <div key={product.id} className="product">
             <h3>{product.name}</h3>
@@ -81,6 +132,11 @@ const EditProducts = () => {
             <p>Prix: {product.price}</p>
             <p>Quantité: {product.quantity}</p>
             <button onClick={() => handleUpdate(product)}>Modifier</button>
+            <button
+              onClick={(e) => handleProductDeletion(e, product.id, index)}
+            >
+              Supprimer
+            </button>
           </div>
         );
       })}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "../Style/Header.css";
 import NegoSud from "../Assets/NegoSud.png";
 import Stack from "@mui/material/Stack";
@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
 
 function Header(props) {
-  const headerTitle = [
+  let headerTitle = [
     ["PRODUITS", "/Products"],
     ["PANIER", "/Cart"],
     ["CONTACT", "/Contact"],
@@ -21,23 +21,25 @@ function Header(props) {
       <div className="negosudWrapper">
         <img src={NegoSud} alt="NEGOSUD" />
       </div>
-      <Stack spacing={2} direction="row">
-        {headerTitle.map((header, index) => {
-          return props.isConnected === true ? (
-            <Link to={header[1]} key={index}>
-              <Button
-                sx={{ fontSize: "22px" }}
-                style={{ lineHeight: "280%" }}
-                color="secondary"
-                size="large"
-                variant="text"
-              >
-                {header[0]}
-              </Button>
-            </Link>
-          ) : null;
-        })}
-      </Stack>
+      {props.isConnected ? (
+        <Stack spacing={2} direction="row">
+          {headerTitle.map((header, index) => {
+            return props.isConnected === true ? (
+              <Link to={header[1]} key={index}>
+                <Button
+                  sx={{ fontSize: "22px" }}
+                  style={{ lineHeight: "280%" }}
+                  color="secondary"
+                  size="large"
+                  variant="text"
+                >
+                  {header[0]}
+                </Button>
+              </Link>
+            ) : null;
+          })}
+        </Stack>
+      ) : null}
       <Stack direction="row" className="authenticationWrapper">
         <Link to="/Connection">
           <Button color="secondary_dark" size="large" variant="text">

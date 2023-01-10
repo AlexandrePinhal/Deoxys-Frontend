@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../Style/AddProducts.css";
+import { toast } from "react-toastify";
 
 const CreateProductForm = () => {
   const [name, setName] = useState("");
@@ -12,7 +13,13 @@ const CreateProductForm = () => {
   const [families, setFamilies] = useState([]);
 
   useEffect(() => {
-    fetch("http://176.136.89.140:5000/fournisseurs/")
+    fetch("http://176.136.89.140:5000/fournisseurs/", {
+      headers : {
+        Authorization: localStorage.getItem("token")
+          ? `Basic ${localStorage.getItem("token")}`
+          : undefined,
+      }
+    })
       .then((response) => response.json())
       .then((fournisseurs) => {
         setFournisseurs(fournisseurs);
@@ -23,7 +30,13 @@ const CreateProductForm = () => {
   }, []);
 
   useEffect(() => {
-    fetch("http://176.136.89.140:5000/families/")
+    fetch("http://176.136.89.140:5000/families/", {
+      headers : {
+        Authorization: localStorage.getItem("token")
+          ? `Basic ${localStorage.getItem("token")}`
+          : undefined,
+      }
+    })
       .then((response) => response.json())
       .then((families) => {
         setFamilies(families);
@@ -38,20 +51,28 @@ const CreateProductForm = () => {
     fetch("http://176.136.89.140:5000/products/", {
       method: "POST",
       headers: {
+        Authorization: localStorage.getItem("token")
+        ? `Basic ${localStorage.getItem("token")}`
+        : undefined,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         name,
         year: parseInt(year),
         fournisseur: parseInt(fournisseur),
-        family : parseInt(famille),
+        family: parseInt(famille),
         price: parseInt(price),
         quantity: parseInt(quantity),
       }),
     })
-      .then((response) => response.json())
-      .then((data) => {
+      .then((response) => {
+        if (response.status === 200) {
+          toast.success("Added!");
+        } else {
+          toast.error("Error");
+        }
       })
+      .then((data) => {})
       .catch((error) => {
         console.error(error);
       });

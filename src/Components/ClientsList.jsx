@@ -1,11 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Role } from "../Pages/App";
+import { toast } from "react-toastify";
 
 const ClientsList = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    fetch("http://176.136.89.140:5000/users/")
+    fetch("http://176.136.89.140:5000/users/", {
+      headers: { Authorization: localStorage.getItem("token")
+      ? `Basic ${localStorage.getItem("token")}`
+      : undefined,}
+    })
       .then((response) => response.json())
       .then((users) => {
         setUsers(users);
@@ -15,22 +19,31 @@ const ClientsList = () => {
       });
   }, []);
 
-  function handleUserDeletion(e, i) {
+  function handleUserDeletion(e, i, index) {
     e.preventDefault(e);
-    let temp = users
-    temp.splice(i, 1);
+    let temp = users;
+    temp.splice(index, 1);
     setUsers([...temp]);
     fetch(`http://176.136.89.140:5000/users/${i}`, {
       method: "DELETE",
       headers: {
+        Authorization: localStorage.getItem("token")
+        ? `Basic ${localStorage.getItem("token")}`
+        : undefined,
         "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      if (response.status === 200) {
+        toast.success("Deleted!");
+      } else {
+        toast.error("Error");
       }
     });
   }
 
   return (
     <div>
-      {users.map((client, i) => {
+      {users.map((client, index) => {
         return (
           <div key={client.email} className="client-info">
             <h3>{client.name}</h3>
@@ -51,7 +64,7 @@ const ClientsList = () => {
             <button
               className="buttonDeletion"
               onClick={(e) => {
-                handleUserDeletion(e, client.id);
+                handleUserDeletion(e, client.id, index);
               }}
             ></button>
           </div>

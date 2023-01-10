@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../Style/App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LandingPage from "./LandingPage";
@@ -37,6 +37,26 @@ const theme = createTheme({
 function App() {
   const [isConnected, setIsConnected] = useState(true);
   const [cart, setCart] = useState([]);
+
+  useEffect(() => {
+
+    fetch("http://176.136.89.140:5000/users/me", {
+      headers: {
+        Authorization: "Basic " + localStorage.getItem("token")
+      }
+    }).then((response) => {
+      if (response.status === 200) {
+        setIsConnected(true);
+      } else {
+        localStorage.removeItem("token");
+        setIsConnected(false);
+      }
+    }).catch((e) => {
+      localStorage.removeItem("token");
+      setIsConnected(false);
+    });
+  }, [])
+  
 
   return (
     <div className="App">

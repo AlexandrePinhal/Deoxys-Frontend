@@ -16,6 +16,9 @@ const ConnexionInscription = (props) => {
     fetch("http://176.136.89.140:5000/users/", {
       method: "POST",
       headers: {
+        Authorization: localStorage.getItem("token")
+        ? `Basic ${localStorage.getItem("token")}`
+        : undefined,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -23,7 +26,7 @@ const ConnexionInscription = (props) => {
         email,
         password,
         role: Role.User,
-      }),
+      })
     })
       .then((response) => response.json())
       .catch((error) => {
@@ -36,6 +39,34 @@ const ConnexionInscription = (props) => {
     setPassword("");
   };
 
+  function login(e) {
+    e.preventDefault();
+
+    localStorage.setItem("token", btoa(email + ":" + password));
+
+    fetch("http://176.136.89.140:5000/users/me", {
+      headers: {
+        Authorization: "Basic " + localStorage.getItem("token")
+      }
+    }).then((response) => {
+      if (response.status === 200) {
+        props.setIsConnected(true);
+        window.location = "/Products";
+      } else {
+        localStorage.removeItem("token");
+        props.setIsConnected(false);
+        setPassword("");
+      }
+    }).catch((e) => {
+      localStorage.removeItem("token");
+      props.setIsConnected(false);
+      setPassword("");
+    });
+
+    setEmail("");
+    setPassword("");
+  }
+
   return (
     <div className="connexion-inscription-container">
       {formulaireActif === "connexion" && (
@@ -46,16 +77,18 @@ const ConnexionInscription = (props) => {
               type="email"
               placeholder="Adresse e-mail"
               className="modern-input"
+              onChange={(e) => setEmail(e.target.value)}
             />
             <input
               type="password"
               placeholder="Mot de passe"
               className="modern-input"
+              onChange={(e) => setPassword(e.target.value)}
             />
             <button
               className="bouton"
-              onClick={() => {
-                props.setIsConnected(true);
+              onClick={(e) => {
+                login(e);
               }}
             >
               Se connecter

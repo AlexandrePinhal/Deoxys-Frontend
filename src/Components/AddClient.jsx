@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "../Style/AddClient.css";
 import { Role } from "../Pages/App";
+import { toast } from "react-toastify";
 
 const AddClientForm = () => {
   const [nom, setNom] = useState("");
@@ -14,6 +15,7 @@ const AddClientForm = () => {
     fetch("http://176.136.89.140:5000/users/", {
       method: "POST",
       headers: {
+        Authorization: (localStorage.getItem("token") ? `Basic ${localStorage.getItem("token")}` : undefined),
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -23,7 +25,13 @@ const AddClientForm = () => {
         role: Role.Admin,
       }),
     })
-      .then((response) => response.json())
+      .then((response) => {
+        if (response.status === 200) {
+          toast.success("Added!");
+        } else {
+          toast.error("Error");
+        }
+      })
       .catch((error) => {
         console.error(error);
       });

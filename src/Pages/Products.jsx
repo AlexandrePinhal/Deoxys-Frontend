@@ -5,7 +5,11 @@ const BouteillesList = (props) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    fetch("http://176.136.89.140:5000/products/")
+    fetch("http://176.136.89.140:5000/products/", {
+      headers: {
+        Authorization: (localStorage.getItem("token") ? `Basic ${localStorage.getItem("token")}` : undefined)
+      }
+    })
       .then((response) => response.json())
       .then((products) => {
         setProducts(products);

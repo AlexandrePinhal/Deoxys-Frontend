@@ -1,10 +1,15 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
+import { toast } from "react-toastify";
 
 const FournisseursList = () => {
   const [fournisseurs, setFournisseurs] = useState([]);
 
   useEffect(() => {
-    fetch("http://176.136.89.140:5000/fournisseurs/")
+    fetch("http://176.136.89.140:5000/fournisseurs/", {
+      headers: { Authorization: localStorage.getItem("token")
+      ? `Basic ${localStorage.getItem("token")}`
+      : undefined,}
+    })
       .then((response) => response.json())
       .then((fournisseurs) => {
         setFournisseurs(fournisseurs);
@@ -14,22 +19,31 @@ const FournisseursList = () => {
       });
   }, []);
 
-  function handleProviderDeletion(e, i) {
+  function handleProviderDeletion(e, i, index) {
     e.preventDefault(e);
-    let temp = fournisseurs
-    temp.splice(i, 1);
+    let temp = fournisseurs;
+    temp.splice(index, 1);
     setFournisseurs([...temp]);
     fetch(`http://176.136.89.140:5000/fournisseurs/${i}`, {
       method: "DELETE",
       headers: {
+        Authorization: localStorage.getItem("token")
+        ? `Basic ${localStorage.getItem("token")}`
+        : undefined,
         "Content-Type": "application/json",
+      },
+    }).then((response) => {
+      if (response.status === 200) {
+        toast.success("Deleted!");
+      } else {
+        toast.error("Error");
       }
     });
   }
 
   return (
     <div>
-      {fournisseurs.map((fournisseur) => {
+      {fournisseurs.map((fournisseur, index) => {
         return (
           <div key={fournisseur.id} className="fournisseur-info">
             <h3>{fournisseur.name}</h3>
@@ -39,7 +53,7 @@ const FournisseursList = () => {
             <button
               className="buttonDeletion"
               onClick={(e) => {
-                handleProviderDeletion(e, fournisseur.id);
+                handleProviderDeletion(e, fournisseur.id, index);
               }}
             ></button>
           </div>

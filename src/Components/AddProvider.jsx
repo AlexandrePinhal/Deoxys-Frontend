@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "../Style/AddProvider.css";
+import { toast } from "react-toastify";
 
 const AddFournisseurForm = () => {
   const [nom, setNom] = useState("");
@@ -12,6 +13,9 @@ const AddFournisseurForm = () => {
     fetch("http://176.136.89.140:5000/fournisseurs/", {
       method: "POST",
       headers: {
+        Authorization: localStorage.getItem("token")
+        ? `Basic ${localStorage.getItem("token")}`
+        : undefined,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
@@ -21,7 +25,13 @@ const AddFournisseurForm = () => {
         email,
       })
     })
-      .then((response) => response.json())
+    .then((response) => {
+      if (response.status === 200) {
+        toast.success("Added!");
+      } else {
+        toast.error("Error");
+      }
+    })
       .catch((error) => {
         console.error(error);
       });
