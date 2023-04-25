@@ -6,11 +6,29 @@ function Cart(props) {
   const [itemsLeftQuantity, setItemsLeftQuantity] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [quantities, setQuantities] = useState([]);
+  const [fournisseurs, setFournisseurs] = useState([]);
+
+  useEffect(() => {
+    fetch("http://176.136.89.140:5000/fournisseurs/", {
+      headers: {
+        Authorization: localStorage.getItem("token")
+          ? `Basic ${localStorage.getItem("token")}`
+          : undefined,
+      },
+    })
+      .then((response) => response.json())
+      .then((fournisseur) => {
+        setFournisseurs(fournisseur);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
 
   useEffect(() => {
     for (let i = 0; i < props.cart.length; i++) {
       let temp = itemsSum;
-      temp[i] = props.cart[i].prix;
+      temp[i] = props.cart[i].price;
       setItemsSum([...temp]);
       let tempQ = quantities;
       tempQ.push(1);
@@ -19,6 +37,16 @@ function Cart(props) {
     handleTotalPrice();
     //eslint-disable-next-line
   }, [props.cart]);
+
+  function getFournisseur(id) {
+    let temp = ''
+    fournisseurs.map((fournisseur) => {
+      if (fournisseur.id === id) {
+        temp = fournisseur.name
+      }
+    })
+    return(temp);
+  }
 
   function handleQuantityPrice(value, price, quantity, index) {
     if (quantity - value >= 0 && value > 0) {
@@ -61,9 +89,9 @@ function Cart(props) {
           {props.cart.map((bouteille, index) => {
             return (
               <li key={bouteille.uuid} className="bouteille-cart">
-                <p>{bouteille.fournisseur}</p>
-                <p>{bouteille.famille}</p>
-                <p>Prix unitaire: {bouteille.prix}€</p>
+                <p>{getFournisseur(bouteille.fournisseur)}</p>
+                <p>{bouteille.name}</p>
+                <p>Prix unitaire: {bouteille.price}€</p>
                 <p>Quantité : </p>
                 <input
                   type="number"
@@ -72,14 +100,19 @@ function Cart(props) {
                   onChange={(e) => {
                     handleQuantityPrice(
                       e.target.value,
-                      bouteille.prix,
-                      bouteille.quantite,
+                      bouteille.price,
+                      bouteille.quantity,
                       index
                     );
                   }}
                 ></input>
                 <p>Prix : {itemsSum[index]} €</p>
-                <p>Quantité disponible: {itemsLeftQuantity[index]}</p>
+                <p>
+                  Quantité disponible:{" "}
+                  {itemsLeftQuantity[index]
+                    ? itemsLeftQuantity[index]
+                    : bouteille.quantity - 1}
+                </p>
                 <button
                   onClick={() => {
                     deleteRow(index);

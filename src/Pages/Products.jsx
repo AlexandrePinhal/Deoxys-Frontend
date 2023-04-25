@@ -37,9 +37,13 @@ const BouteillesList = (props) => {
   }, []);
 
   function handleAddCart(bouteille) {
-    let temp = props.cart;
-    temp.push(bouteille);
-    props.setCart([...temp]);
+    if (props.cart.includes(bouteille)) {
+      return alert("Produit déjà ajouté");
+    } else {
+      let temp = props.cart;
+      temp.push(bouteille);
+      props.setCart([...temp]);
+    }
   }
 
   const handleSearch = (event) => {
@@ -99,7 +103,13 @@ const BouteillesList = (props) => {
             style={{ width: "50%", padding: "5px" }}
           />
         </div>
-        <div style={{display : 'flex', flexDirection : 'row', justifyContent : 'space-evenly'}}>
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            justifyContent: "space-evenly",
+          }}
+        >
           <div
             style={{
               display: "flex",

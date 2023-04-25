@@ -98,7 +98,6 @@ const EditProducts = () => {
   };
 
   function handleProductDeletion(e, i, index) {
-    console.log(i)
     e.preventDefault(e);
     let temp = products;
     temp.splice(index, 1);
