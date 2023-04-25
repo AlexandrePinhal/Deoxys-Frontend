@@ -68,3 +68,47 @@
 .bouteille-item button:hover {
   background-color: #d8bfb2;
 }
+
+select {
+  background-color: #e2dfdf;
+  border: none;
+  color: #333;
+  padding: 2px;
+  font-size: 16px;
+  cursor: pointer;
+  max-width: 300px;
+  border-radius: 4px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+select:focus {
+  outline: none;
+  box-shadow: 0 0 5px #789abc;
+}
+
+select option {
+  background-color: white;
+  color: #333;
+}
+
+.inputProducts {
+  border: none;
+  border-bottom: 2px solid #ccc;
+  font-size: 16px;
+  padding: 10px;
+  margin: 10px 0;
+  background-color: #efe2d7c7;
+}
+
+.inputProdcts:focus {
+  outline: none;
+  border-bottom: 2px solid #f48338;
+  outline: none !important;
+  outline-width: 0 !important;
+}
+
+input {
+  outline: none;
+}

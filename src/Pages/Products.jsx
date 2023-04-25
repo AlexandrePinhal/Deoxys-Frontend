@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 import "../Style/Products.css";
 
 const BouteillesList = (props) => {
@@ -16,10 +16,10 @@ const BouteillesList = (props) => {
           : undefined,
       },
     })
-    .then((response) => response.json())
+      .then((response) => response.json())
       .then((families) => {
-        setFamilies(families)
-      })
+        setFamilies(families);
+      });
     fetch("http://176.136.89.140:5000/products/", {
       headers: {
         Authorization: localStorage.getItem("token")
@@ -80,47 +80,61 @@ const BouteillesList = (props) => {
 
   return (
     <div>
-      <div style={{backgroundColor : "#eae5e1"}}>
-
-      <div
-        style={{ display: "flex", justifyContent: "center", marginBottom: "20px", backgroundColor : "#eae5e1", paddingTop : "20px"}}
-      >
-        <input
-          type="text"
-          placeholder="Rechercher un produit"
-          value={searchTerm}
-          onChange={handleSearch}
-          style={{ width: "50%", padding: "5px" }}
-        />
-      </div>
-      <div
-        style={{ display: "flex", justifyContent: "center", margin: "20px" }}
-      >
-        <label>Trier par prix:</label>
-        <select
-          value={sortOrder}
-          onChange={handleSort}
-          style={{ marginLeft: "10px" }}
+      <div style={{ backgroundColor: "#eae5e1" }}>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginBottom: "20px",
+            backgroundColor: "#eae5e1",
+            paddingTop: "20px",
+          }}
         >
-          <option value="asc">Prix croissant</option>
-          <option value="desc">Prix décroissant</option>
-        </select>
-      </div>
-      <div
-        style={{ display: "flex", justifyContent: "center", marginTop: "20px" }}
-      >
-        <label>Filtrer par:</label>
-        <select
-          value={filterBy}
-          onChange={handleFilter}
-          style={{ marginLeft: "10px" }}
-        >
-          <option value="all">Toutes les catégories</option>
-          {families.map((family) => {return (
-            <option value={family.id}>{family.name}</option>
-          )})}
-        </select>
-      </div>
+          <input
+            className="inputProducts"
+            type="text"
+            placeholder="Rechercher un produit"
+            value={searchTerm}
+            onChange={handleSearch}
+            style={{ width: "50%", padding: "5px" }}
+          />
+        </div>
+        <div style={{display : 'flex', flexDirection : 'row', justifyContent : 'space-evenly'}}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <label>Trier par prix:</label>
+            <select
+              value={sortOrder}
+              onChange={handleSort}
+              style={{ marginLeft: "10px" }}
+            >
+              <option value="asc">Prix croissant</option>
+              <option value="desc">Prix décroissant</option>
+            </select>
+          </div>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+            }}
+          >
+            <label>Filtrer par:</label>
+            <select
+              value={filterBy}
+              onChange={handleFilter}
+              style={{ marginLeft: "10px" }}
+            >
+              <option value="all">Toutes les catégories</option>
+              {families.map((family) => {
+                return <option value={family.id}>{family.name}</option>;
+              })}
+            </select>
+          </div>
+        </div>
       </div>
       <div className="bouteilles-grid">
         {props.isConnected === true ? (
