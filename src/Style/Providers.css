@@ -24,3 +24,9 @@
 .fournisseur-info p:first-child {
   margin-top: 10px;
 }
+
+@media only screen and (max-width: 600px) {
+  .fournisseur-info {
+    width: 80%;
+  }
+}

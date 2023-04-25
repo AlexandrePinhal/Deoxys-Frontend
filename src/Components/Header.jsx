@@ -9,6 +9,7 @@ function Header(props) {
   let headerTitle = [
     ["PRODUITS", "/Products"],
     ["PANIER", "/Cart"],
+    ["ORDERS", "/Orders"],
     ["CONTACT", "/Contact"],
     ["CLIENTS", "/Clients"],
     ["FOURNISSEURS", "/Providers"],

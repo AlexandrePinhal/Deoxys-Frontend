@@ -102,3 +102,14 @@
 .bouteille-cart button:active {
   background-color: rgba(255, 0, 0, 0.3);
 }
+
+@media only screen and (max-width: 600px) {
+
+  .bouteille-cart {
+    flex-direction: column;
+  }
+
+  .bouteille-cart p:first-child {
+    width: 50%;
+  }
+}

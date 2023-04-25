@@ -112,3 +112,20 @@ select option {
 input {
   outline: none;
 }
+
+.ProductsFilterHolder {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+@media only screen and (max-width: 600px) {
+  .ProductsFilterHolder {
+    flex-direction: column;
+  }
+
+  .bouteille-item {
+    width: 100%;
+    margin-top: 1vh;
+  }
+}

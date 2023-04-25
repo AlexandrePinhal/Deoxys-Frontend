@@ -104,11 +104,7 @@ const BouteillesList = (props) => {
           />
         </div>
         <div
-          style={{
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "space-evenly",
-          }}
+          className="ProductsFilterHolder"
         >
           <div
             style={{

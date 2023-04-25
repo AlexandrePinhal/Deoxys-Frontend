@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import "../Style/cart.css";
+import { toast } from "react-toastify";
 
 function Cart(props) {
   const [itemsSum, setItemsSum] = useState([]);
@@ -82,6 +83,35 @@ function Cart(props) {
     setItemsSum([...temp2]);
   }
 
+  function handleCommandFinalization() {
+    let ItemsId = []
+    props.cart.forEach((item) => ItemsId.push(item.id))
+    fetch("http://176.136.89.140:5000/orders", {
+      method: "POST",
+      headers: {
+        Authorization: localStorage.getItem("token")
+        ? `Basic ${localStorage.getItem("token")}`
+        : undefined,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        productList : ItemsId,
+        orderType : 0      }),
+    })
+      .then((response) => {
+        console.log(response.status)
+        if (response.status === 200) {
+          toast.success("Added!");
+        } else {
+          toast.error("Error");
+        }
+      })
+      .then((data) => {})
+      .catch((error) => {
+        console.error(error);
+      });
+  }
+
   return (
     <ul className="bouteilles-list">
       {props.isConnected === true ? (
@@ -132,7 +162,7 @@ function Cart(props) {
             >
               <div>prix total : {totalPrice} €</div>
               <div>
-                <button>Finaliser Commande</button>
+                <button onClick={() => {handleCommandFinalization()}}>Finaliser Commande</button>
               </div>
             </div>
           ) : (

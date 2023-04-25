@@ -77,3 +77,27 @@
   background-color: #f0edea;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+
+@media only screen and (max-width: 600px) {
+  .connexion-inscription-container {
+    padding: 0;
+    padding-top: 5vh;
+  }
+
+  .connexion-form{
+    width: 100%;
+  }
+
+  .connexion-form > input{
+    width: 66%;
+  }
+
+  .inscription-form {
+    width: 100%;
+  }
+
+  .inscription-form > input {
+    width: 66%;
+  }
+}

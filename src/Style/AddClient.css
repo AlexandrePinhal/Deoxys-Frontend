@@ -50,3 +50,9 @@
 .add-client-form button:hover {
   background-color: #d8bfb2;
 }
+
+@media only screen and (max-width: 600px) {
+  .add-client-form button {
+    right: -40%;
+  }
+}

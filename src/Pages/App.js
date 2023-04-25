@@ -12,6 +12,7 @@ import ProvidersPage from "./Fournisseurs";
 import FamiliesPage from "./Familles";
 import ConnexionInscription from "./ConnexionInscription";
 import ManageProducts from "./ManageProducts";
+import Orders from "./Orders";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 
 let role = {};
@@ -39,24 +40,24 @@ function App() {
   const [cart, setCart] = useState([]);
 
   useEffect(() => {
-
     fetch("http://176.136.89.140:5000/users/me", {
       headers: {
-        Authorization: "Basic " + localStorage.getItem("token")
-      }
-    }).then((response) => {
-      if (response.status === 200) {
-        setIsConnected(true);
-      } else {
+        Authorization: "Basic " + localStorage.getItem("token"),
+      },
+    })
+      .then((response) => {
+        if (response.status === 200) {
+          setIsConnected(true);
+        } else {
+          localStorage.removeItem("token");
+          setIsConnected(false);
+        }
+      })
+      .catch((e) => {
         localStorage.removeItem("token");
         setIsConnected(false);
-      }
-    }).catch((e) => {
-      localStorage.removeItem("token");
-      setIsConnected(false);
-    });
-  }, [])
-  
+      });
+  }, []);
 
   return (
     <div className="App">
@@ -81,6 +82,10 @@ function App() {
               element={
                 <Cart cart={cart} setCart={setCart} isConnected={isConnected} />
               }
+            />
+            <Route
+              path="/Orders"
+              element={<Orders isConnected={isConnected} />}
             />
             <Route
               path="/Contact"
