@@ -33,10 +33,11 @@ function Orders(props) {
       .then(async (orderList) => {
         const ordersWithProducts = await Promise.all(
           orderList.map(async (order) => {
+            let totalPrice = 0;
             const products = await Promise.all(
               order.productList.map(async (productId) => {
                 const response = await fetch(
-                  `http://176.136.89.140:5000/products/${productId}`,
+                  `http://176.136.89.140:5000/products/${productId.split(";")[0]}`,
                   {
                     headers: {
                       Authorization: localStorage.getItem("token")
@@ -46,10 +47,13 @@ function Orders(props) {
                   }
                 );
                 const product = await response.json();
+                totalPrice += product.price * (productId.split(';')[1] || 1)
                 return (
                   <div key={productId}>
-                    <p>{product.name}</p>
-                    <p>{product.price} €</p>
+                    <p>{product.name} | </p>
+                    <p>Prix Unitaire : </p>
+                    <p>{product.price} € | </p>
+                    <p>Qty. {productId.split(";")[1] || 1}</p>
                   </div>
                 );
               })
@@ -57,6 +61,7 @@ function Orders(props) {
             return {
               ...order,
               products,
+              totalPrice
             };
           })
         );
@@ -100,11 +105,13 @@ function Orders(props) {
   return (
     <div className="order-container">
       {orders.map((order) => {
-        return order.id === userId ? (
-          <div key={order.id} >
+        return order.user === userId ? (
+          <div key={order.id}>
+            {console.log('orderinho', order)}
             <p>Type of Order : {getUserType(order.orderType)} order</p>
             <p>State of Order : {getOrderState(order.orderState)}</p>
             {order.products}
+            <p>Tot. {order.totalPrice} €</p>
           </div>
         ) : null;
       })}

@@ -8,8 +8,23 @@ function Cart(props) {
   const [totalPrice, setTotalPrice] = useState(0);
   const [quantities, setQuantities] = useState([]);
   const [fournisseurs, setFournisseurs] = useState([]);
+  const [myID, setMyID] = useState("");
 
   useEffect(() => {
+    fetch("http://176.136.89.140:5000/users/me", {
+      headers: {
+        Authorization: localStorage.getItem("token")
+          ? `Basic ${localStorage.getItem("token")}`
+          : undefined,
+      },
+    })
+      .then((response) => response.json())
+      .then((user) => {
+        setMyID(user.id);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
     fetch("http://176.136.89.140:5000/fournisseurs/", {
       headers: {
         Authorization: localStorage.getItem("token")
@@ -40,13 +55,13 @@ function Cart(props) {
   }, [props.cart]);
 
   function getFournisseur(id) {
-    let temp = ''
+    let temp = "";
     fournisseurs.map((fournisseur) => {
       if (fournisseur.id === id) {
-        temp = fournisseur.name
+        temp = fournisseur.name;
       }
-    })
-    return(temp);
+    });
+    return temp;
   }
 
   function handleQuantityPrice(value, price, quantity, index) {
@@ -84,22 +99,26 @@ function Cart(props) {
   }
 
   function handleCommandFinalization() {
-    let ItemsId = []
-    props.cart.forEach((item) => ItemsId.push(item.id))
+    let ItemsId = [];
+    console.log(props.cart);
+    props.cart.forEach((item, i) => ItemsId.push(item.id + ";" + quantities[i]));
     fetch("http://176.136.89.140:5000/orders", {
       method: "POST",
       headers: {
         Authorization: localStorage.getItem("token")
-        ? `Basic ${localStorage.getItem("token")}`
-        : undefined,
+          ? `Basic ${localStorage.getItem("token")}`
+          : undefined,
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        productList : ItemsId,
-        orderType : 0      }),
+        productList: ItemsId,
+        orderType: 0,
+        user: myID,
+        orderState: 1,
+      }),
     })
       .then((response) => {
-        console.log(response.status)
+        console.log(response.status);
         if (response.status === 200) {
           toast.success("Added!");
         } else {
@@ -162,7 +181,13 @@ function Cart(props) {
             >
               <div>prix total : {totalPrice} €</div>
               <div>
-                <button onClick={() => {handleCommandFinalization()}}>Finaliser Commande</button>
+                <button
+                  onClick={() => {
+                    handleCommandFinalization();
+                  }}
+                >
+                  Finaliser Commande
+                </button>
               </div>
             </div>
           ) : (

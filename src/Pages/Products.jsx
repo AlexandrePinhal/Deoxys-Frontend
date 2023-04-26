@@ -1,5 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../Style/Products.css";
+import vinrosé from "../Assets/Products/vinrosé.jpg";
+import vinrouge from "../Assets/Products/vinrouge.jpg";
+import vinblanc from "../Assets/Products/vinblanc.jpg";
 
 const BouteillesList = (props) => {
   const [products, setProducts] = useState([]);
@@ -7,6 +10,9 @@ const BouteillesList = (props) => {
   const [sortOrder, setSortOrder] = useState("asc");
   const [filterBy, setFilterBy] = useState("all");
   const [families, setFamilies] = useState([]);
+  const [showDescription, setShowDescription] = useState(false);
+  const [selectedBottleDescription, setSelectedBottleDescription] =
+    useState("");
 
   useEffect(() => {
     fetch("http://176.136.89.140:5000/families/", {
@@ -58,6 +64,21 @@ const BouteillesList = (props) => {
     setFilterBy(event.target.value);
   };
 
+  const handleShowDescription = (description) => {
+    setSelectedBottleDescription(description);
+    setShowDescription(true);
+  };
+
+  const getImageFromFamily = (family) => {
+    if (family === 1) {
+      return <img src={vinrouge} alt={"vin rouge"} />;
+    } else if (family === 3) {
+      return <img src={vinrosé} alt={"vin rosé"} />;
+    } else if (family === 1006) {
+      return <img src={vinblanc} alt={"vin blanc"} />;
+    }
+  };
+
   let filteredProducts = products.filter((product) => {
     if (filterBy === "all") {
       return true;
@@ -103,9 +124,7 @@ const BouteillesList = (props) => {
             style={{ width: "50%", padding: "5px" }}
           />
         </div>
-        <div
-          className="ProductsFilterHolder"
-        >
+        <div className="ProductsFilterHolder">
           <div
             style={{
               display: "flex",
@@ -148,14 +167,16 @@ const BouteillesList = (props) => {
             {filteredProducts.map((bouteille) => {
               return (
                 <div key={bouteille.id} className="bouteille-item">
-                  {/* <img
-                src={require(../Assets/Products/${bouteille.id}.png)}
-                alt={${bouteille.fournisseur} ${bouteille.famille}}
-                /> */}
+                  {getImageFromFamily(bouteille.family)}
                   <p>{bouteille.name}</p>
-                  <p>{bouteille.famille}</p>
+                  <p>{bouteille.family}</p>
                   <p>Prix: {bouteille.price}€</p>
                   <p>Quantité disponible: {bouteille.quantity}</p>
+                  <button
+                    onClick={() => handleShowDescription(bouteille.description)}
+                  >
+                    Lire la description
+                  </button>
                   <button
                     onClick={() => {
                       handleAddCart(bouteille);
@@ -169,6 +190,16 @@ const BouteillesList = (props) => {
           </>
         ) : (
           <p>Vous n'êtes pas connecté</p>
+        )}
+        {showDescription && (
+          <div className="modal">
+            <div className="modal-content">
+              <span className="close" onClick={() => setShowDescription(false)}>
+                &times;
+              </span>
+              <p>{selectedBottleDescription}</p>
+            </div>
+          </div>
         )}
       </div>
     </div>

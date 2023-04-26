@@ -1,5 +1,6 @@
 .order-container {
   display: flex;
+  flex-direction: column;
   /* justify-content: space-between; */
   align-items: baseline;
   padding: 16px;
@@ -21,7 +22,7 @@
 }
 
 .order-container > div > div {
-  width: 50%;
+  /* width: 50%; */
   text-align: center;
   display: flex;
   flex-direction: row;
